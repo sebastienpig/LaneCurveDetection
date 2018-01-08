@@ -16,7 +16,32 @@ Pipeline includes:
 
 5. warp the region of interest
 
+<table>
+  <tr>
+    <th>original</th>
+    <th>warped</th>
+  </tr>
+  <tr>
+    <td><img src="bird_view/persp_transform_original.jpg"></td>
+    <td>$<img src="persp_transform_warped.jpg"></td>
+  </tr>
+  </table>
+
+
+
 6. get an histogram and detect left and right lane from histogram
+
+
+<table>
+  <tr>
+    <th>detected pixels</th>
+    <th>histogram</th>
+  </tr>
+  <tr>
+    <td><img src="assets/histogram.png"></td>
+    <td>$<img src="pixels_highlighted.png"></td>
+  </tr>
+  </table>
 
 7. fit a polynom from the detected lanes
 
