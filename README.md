@@ -20,6 +20,7 @@ Pipeline includes:
 
 7. fit a polynom from the detected lanes
 
+<img src="road_images/frame612_missing top right pixel.png">
 8. color the area between the lanes
 
 9. add to the original image and unwarp the combined image
