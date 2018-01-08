@@ -14,6 +14,9 @@ Pipeline includes:
 
 4. choosing a region of interest to warp/unwarp
 
+The region of interest tries to eliminate the elements that could disturb the lane detection.
+It is lower than the horizon and restricted to the center of the left lane, encompassing both lanes on its borders.
+
 5. warp the region of interest
 
 <table>
