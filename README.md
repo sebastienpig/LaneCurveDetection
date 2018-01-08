@@ -23,7 +23,7 @@ Pipeline includes:
   </tr>
   <tr>
     <td><img src="bird_view/persp_transform_original.jpg"></td>
-    <td>$<img src="persp_transform_warped.jpg"></td>
+    <td><img src="bird_view/persp_transform_warped.jpg"></td>
   </tr>
   </table>
 
@@ -39,7 +39,7 @@ Pipeline includes:
   </tr>
   <tr>
     <td><img src="assets/histogram.png"></td>
-    <td>$<img src="pixels_highlighted.png"></td>
+    <td>$<img src="assets/pixels_highlighted.png"></td>
   </tr>
   </table>
 
