@@ -6,11 +6,19 @@ Visual includes coloring the surface between the left and the right lanes
 
 Pipeline includes:
 
-1. acquiring image
 
-2. filtering the image
 
-3. undistorting the image
+<h3> Undistorting the image </h3>
+
+The calibration of the camera is done through a chessboard view under different angles.
+Parameters are saved and used later on.
+
+The openCV function used is cv2.undistort(image, calib.mtx, calib.dist, None, calib.mtx)
+
+We can see clearly in the below example that the image has been undistorded and looks flat.
+<img src="chessboard.png">
+
+Here is an example on the road is: <br>
 
 4. choosing a region of interest to warp/unwarp
 
