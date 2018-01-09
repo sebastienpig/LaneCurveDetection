@@ -16,9 +16,13 @@ Parameters are saved and used later on.
 The openCV function used is cv2.undistort(image, calib.mtx, calib.dist, None, calib.mtx)
 
 We can see clearly in the below example that the image has been undistorded and looks flat.
-<img src="chessboard.png">
+<img src="assets/chessboard.png">
 
 Here is an example on the road is: <br>
+
+We can see that the trees and the mountain have changed, mountain is higher and trees look bigger.
+<img src="assets/undistorded_before_after.jpg">
+
 
 4. choosing a region of interest to warp/unwarp
 
