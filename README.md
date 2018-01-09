@@ -69,12 +69,17 @@ We can see that the trees and the mountain have changed, mountain is higher and 
 
 <h3> Applying filter on the image </h3>
 
-<h3> choosing a region of interest to warp/unwarp </h3>
+After trying different filters like grey, and threshold, I used the HLS filter that is enhancing the lanes:
+<img src="assets/color_gradient.png"><br>
+HLS Filter <br>
+<img src="assets/HLS_filter.png"><br>
+
+<h3> Choosing a region of interest to warp/unwarp </h3>
 
 The region of interest tries to eliminate the elements that could disturb the lane detection.
 It is lower than the horizon and restricted to the center of the left lane, encompassing both lanes on its borders.
 
-<h3>  warp the region of interest </h3>
+<h3>  Warping the region of interest </h3>
 
 <table>
   <tr>
@@ -89,7 +94,7 @@ It is lower than the horizon and restricted to the center of the left lane, enco
 
 
 
-<h3> Detect left and right lane from an histogram </h3>
+<h3> Detecting left and right lanes from an histogram </h3>
 
 
 <table>
@@ -103,15 +108,15 @@ It is lower than the horizon and restricted to the center of the left lane, enco
   </tr>
   </table>
 
-<h3> fit a polynom from the detected lanes <h3> 
+<h3> Fitting a polynom from the detected lanes <h3> 
 
 <img src="road_images/frame612_missing top right pixel.png">
 
-<h3>  color the area between the lanes <h3> 
+<h3>  Coloring the area between the lanes <h3> 
 
-<h3>  add to the original image and unwarp the combined image <h3> 
+<h3>  Adding to the original image and unwarp the combined image <h3> 
 
-<h3>  calculate the curvature <h3> 
+<h3>  Calculating the curvature <h3> 
 
-<h3>  process the video stream <h3> 
+<h3>  Processing the video stream <h3> 
 
