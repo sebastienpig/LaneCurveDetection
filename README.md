@@ -7,12 +7,56 @@ Visual includes coloring the surface between the left and the right lanes
 Pipeline includes:
 
 
-
-<h3> Undistorting the image </h3>
-
+<h3> Calibrating the camera </h3>
 The calibration of the camera is done through a chessboard view under different angles.
 Parameters are saved and used later on.
 
+The parameters are saved in a python object: <br>
+
+<pre>
+
+class calibration:
+         
+    def __init__(self):
+        self.dist=0  # distortion coefficients
+        self.mtx=0   #  camera matrix to transform 3D pts to 2D points
+        self.rvecs=0 # rotation vector
+        self.tvecs=0 # translation vector
+    
+    def calibrate(self,mtx, dist, rvecs, tvecs):
+        self.mtx=mtx   #  camera matrix to transform 3D pts to 2D points
+        self.dist=dist  # distortion coefficients
+        self.rvecs=rvecs # rotation vector
+        self.tvecs=tvecs # translation vector
+
+    def show_parameters(self):
+        print ("dist:", self.dist)
+        print ("mtx:", self.mtx)
+        print ("rvecs:", self.rvecs)
+        print ("tvecs:", self.tvecs)
+</pre>
+
+First the image is turned into greyed scale, then corner are found using a openCV function to finally gives the points to the <b>cv2.calibrateCamera</b> function. 
+
+<pre>
+# Convert to grayscale
+        gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+        gray_size = (gray.shape[1], gray.shape[0])
+        
+        # Find checkboard corners
+        ret, corners = cv2.findChessboardCorners(gray, (nx, ny), None)
+       
+        if ret == True: #matching points were found
+        
+            # Add points to list
+            objpoints.append(objptm)
+            imgpoints.append(corners)
+
+            cv2.drawChessboardCorners(img, (nx, ny), corners, ret)
+</pre>
+
+
+<h3> Undistorting the image </h3>
 The openCV function used is cv2.undistort(image, calib.mtx, calib.dist, None, calib.mtx)
 
 We can see clearly in the below example that the image has been undistorded and looks flat.
