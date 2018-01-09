@@ -295,10 +295,10 @@ BEfore doing so we create a Line object that will save many of the vector of poi
 
 myLine=Line()
 
-# Read video
+<b>Read video </b>
 clip = VideoFileClip(video_reference)
     
-# Process video
+<b>Process video</b>
 clip_processed = clip.fl_image(tracking_road) 
 
 
