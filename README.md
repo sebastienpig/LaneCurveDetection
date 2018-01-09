@@ -191,7 +191,7 @@ A Successfll extraction will look like:<br>
 
 <li> Avoiding losing track </li> <br>
 
-In case pixels cannot be detected in an enough quantity in at least 2 windows, which should be enough to give the curve of the polynome I would use pixels from a previous position that had at least two qulifying windows:<br>
+In case pixels cannot be detected in an enough quantity in at least 2 windows, which should be enough to give the curve of the polynome I would use pixels from a previous position that had at least two qualifying windows:<br>
 
 <pre>
 # Extract left and right line pixel positions
@@ -206,6 +206,19 @@ In case pixels cannot be detected in an enough quantity in at least 2 windows, w
         myLine.historial_leftx = leftx
         myLine.historial_lefty = lefty
 </pre>
+
+I also take the median of the last 5 frames to avoid jumps in the coefficients:
+
+<pre>
+if (myLine.counter==5):  # taking the median of the last 5 frames to avoid crazy jumps
+            myLine.counter -= 1
+            
+            if (0): # checking the pixels exist in the array
+                print ("reset length of myLine.left_lane_pixels", len(myLine.left_lane_pixels))
+                
+            left_lane_pixels_array = np.asarray(myLine.left_lane_pixels)   
+            left_fit = np.median(left_lane_pixels_array, axis=0)
+ </pre>
 
 <h3>  Coloring the area between the lanes </h3> 
 
