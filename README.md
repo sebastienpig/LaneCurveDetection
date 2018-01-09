@@ -143,6 +143,43 @@ img_warped, M, Minv = get_birds_eye_view(filtered_img)
 
 <h3> Fitting a polynom from the detected lanes </h3> 
 
+We define two research areas corresponding to the peak of the histogram, those are the leftx_base and rightx_base.
+Then across 9 windows we will identify the nonzero pixels, count them and tke their mean. The next window is adjusted on the mean if there are more than 50 pixels found.
+
+Once all the 9 windows have been looked at and the indexes of all pixels accumulated a polynome is extracted: <br>
+
+<pre>
+ left_fit = np.polyfit(lefty, leftx, 2)
+</pre>
+
+
+<pre>
+# Current positions to be updated for each window
+    leftx_current = leftx_base
+    rightx_current = rightx_base
+    
+    # Set the width of the windows +/- margin
+    margin = 100 
+    
+    # Set minimum number of pixels found to recenter window
+    minpix = 50
+  
+  ...
+
+    
+    # Step through the windows one by one
+    for window in range(nwindows):
+        # Identify window boundaries in x and y (and right and left)
+        win_y_low = img_warped.shape[0] - (window+1)*window_height
+        win_y_high = img_warped.shape[0] - window*window_height
+        
+        win_xleft_low = leftx_current - margin
+        win_xleft_high = leftx_current + margin
+        
+        win_xright_low = rightx_current - margin
+        win_xright_high = rightx_current + margin
+        
+</pre>
 <img src="road_images/frame612_missing top right pixel.png">
 
 
@@ -165,7 +202,7 @@ In case pixels cannot be detected in an enough quantity in at least 2 windows, w
         myLine.historial_lefty = lefty
 </pre>
 
-<h3>  Coloring the area between the lanes <h3> 
+<h3>  Coloring the area between the lanes </h3> 
 
 A <b>polygone<b/> is retrieved from the <b>warped area<b> and <b>colored</b>, and then <b>superimposed</b> on the <b>undistorded</b> image.
 
