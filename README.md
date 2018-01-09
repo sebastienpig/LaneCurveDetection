@@ -73,6 +73,14 @@ After trying different filters like grey, and threshold, I used the HLS filter t
 <img src="assets/color_gradient.png"><br>
 HLS Filter <br>
 <img src="assets/HLS_filter.png"><br>
+<pre>
+def hls_select(img, thresh=(0, 255)):
+    hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
+    s_channel = hls[:,:,2]
+    binary_output = np.zeros_like(s_channel)
+    binary_output[(s_channel > thresh[0]) & (s_channel <= thresh[1])] = 1
+    return binary_output
+</pre>
 S Space <br>
 <img src="assets/color_gradient.png"><br>
 
@@ -82,6 +90,27 @@ The region of interest tries to eliminate the elements that could disturb the la
 It is lower than the horizon and restricted to the center of the left lane, encompassing both lanes on its borders.
 
 <h3>  Warping the region of interest </h3>
+
+The operation is done in three steps:
+1) apply filter
+2) undistord the image
+3) warping
+
+<pre>
+<li><b># Read the image</b></li>
+test_img = 'road_images/test3.jpg'
+img_original = mpimg.imread(test_img) 
+
+<li><b># Step 1: Undistord the image</b></li>
+image_undistorted = undistort_road_image(img_original, calib)
+#img_mask = pipeline(img)
+
+<li><b># Step 2: Apply a mask to see the lanes more clearly</b></li>
+filtered_img = hls_select(image_undistorted, thresh=(50, 255))#(90, 255)
+
+<li><b># Step 3: Get a bird view of the lanes using a zone</b></li>
+img_warped, M, Minv = get_birds_eye_view(filtered_img)
+</pre>
 
 <table>
   <tr>
