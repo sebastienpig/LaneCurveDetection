@@ -182,6 +182,11 @@ Once all the 9 windows have been looked at and the indexes of all pixels accumul
 </pre>
 <img src="road_images/frame612_missing top right pixel.png">
 
+A Successfll extraction will look like:<br>
+
+<img src ="assets/windows.png">
+
+<img src="assets/lane_detected_yellow.png">
 
 
 <li> Avoiding losing track </li> <br>
