@@ -72,7 +72,9 @@ We can see that the trees and the mountain have changed, mountain is higher and 
 After trying different filters like grey, and threshold, I used the HLS filter that is enhancing the lanes:
 <img src="assets/color_gradient.png"><br>
 HLS Filter <br>
-<img src="assets/HLS_filter.png"><br>
+<img src="assets/HLS_filter.png"><br><br>
+S Space < br>
+<img src="assets/color_gradient.png"><br>
 
 <h3> Choosing a region of interest to warp/unwarp </h3>
 
