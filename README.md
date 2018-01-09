@@ -67,13 +67,14 @@ Here is an example on the road is: <br>
 We can see that the trees and the mountain have changed, mountain is higher and trees look bigger.
 <img src="assets/undistorded_before_after.jpg">
 
+<h3> Applying filter on the image </h3>
 
-4. choosing a region of interest to warp/unwarp
+<h3> choosing a region of interest to warp/unwarp </h3>
 
 The region of interest tries to eliminate the elements that could disturb the lane detection.
 It is lower than the horizon and restricted to the center of the left lane, encompassing both lanes on its borders.
 
-5. warp the region of interest
+<h3>  warp the region of interest </h3>
 
 <table>
   <tr>
@@ -88,7 +89,7 @@ It is lower than the horizon and restricted to the center of the left lane, enco
 
 
 
-6. get an histogram and detect left and right lane from histogram
+<h3> Detect left and right lane from an histogram </h3>
 
 
 <table>
@@ -102,14 +103,15 @@ It is lower than the horizon and restricted to the center of the left lane, enco
   </tr>
   </table>
 
-7. fit a polynom from the detected lanes
+<h3> fit a polynom from the detected lanes <h3> 
 
 <img src="road_images/frame612_missing top right pixel.png">
-8. color the area between the lanes
 
-9. add to the original image and unwarp the combined image
+<h3>  color the area between the lanes <h3> 
 
-10. calculate the curvature
+<h3>  add to the original image and unwarp the combined image <h3> 
 
-11. process the video stream
+<h3>  calculate the curvature <h3> 
+
+<h3>  process the video stream <h3> 
 
