@@ -141,7 +141,7 @@ img_warped, M, Minv = get_birds_eye_view(filtered_img)
   </tr>
   </table>
 
-<h3> Fitting a polynom from the detected lanes <h3> 
+<h3> Fitting a polynom from the detected lanes </h3> 
 
 <img src="road_images/frame612_missing top right pixel.png">
 
@@ -167,6 +167,22 @@ In case pixels cannot be detected in an enough quantity in at least 2 windows, w
 
 <h3>  Coloring the area between the lanes <h3> 
 
+A <b>polygone<b/> is retrieved from the <b>warped area<b> and <b>colored</b>, and then <b>superimposed</b> on the <b>undistorded</b> image.
+
+<img src="assets/green_portion_.jpg">
+
+<pre>
+
+...
+    #Draw the lane onto the warped blank image
+    cv2.fillPoly(color_warp, np.int_([pts]), (0,255, 0))
+
+    # Warp the blank back to original image space using inverse perspective matrix (Minv)
+    newwarp = cv2.warpPerspective(color_warp, Minv, (image_undistorted.shape[1], image_undistorted.shape[0])) 
+    # Combine the result with the original image
+    result = cv2.addWeighted(image_undistorted, 1, newwarp, 0.3, 0)
+    
+</pre>
 <h3>  Adding to the original image and unwarp the combined image <h3> 
 
 <h3>  Calculating the curvature <h3> 
