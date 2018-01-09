@@ -143,6 +143,26 @@ img_warped, M, Minv = get_birds_eye_view(filtered_img)
 
 <img src="road_images/frame612_missing top right pixel.png">
 
+
+
+<li> Avoiding losing track </li> <br>
+
+In case pixels cannot be detected in an enough quantity in at least 2 windows, which should be enough to give the curve of the polynome I would use pixels from a previous position that had at least two qulifying windows:<br>
+
+<pre>
+# Extract left and right line pixel positions
+    leftx = nonzerox[left_lane_inds]
+    lefty = nonzeroy[left_lane_inds] 
+    rightx = nonzerox[right_lane_inds]
+    righty = nonzeroy[right_lane_inds]
+    
+    if (cpt_empty_windows <8):
+        myLine.historial_rightx = rightx
+        myLine.historial_righty = righty
+        myLine.historial_leftx = leftx
+        myLine.historial_lefty = lefty
+</pre>
+
 <h3>  Coloring the area between the lanes <h3> 
 
 <h3>  Adding to the original image and unwarp the combined image <h3> 
