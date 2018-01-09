@@ -220,11 +220,11 @@ A <b>polygone</b> is retrieved from the <b>warped area</b> and <b>colored</b>, a
     result = cv2.addWeighted(image_undistorted, 1, newwarp, 0.3, 0)
     
 </pre>
-<h3>  Adding to the original image and unwarp the combined image <h3> 
+<h3>  Adding to the original image and unwarp the combined image </h3> 
 
-<h3>  Calculating the curvature <h3> 
+<h3>  Calculating the curvature </h3> 
 
- We define a conversions in x and y from pixels space to meters and use a conversion factor. We use the points previoulsy extracted for drawing the curve.
+ We define a conversions in x and y from pixels space to meters and use a conversion factor. We use the points previoulsy extracted for drawing the curve using a polynome.
 
 <pre>
 
@@ -269,5 +269,28 @@ A <b>polygone</b> is retrieved from the <b>warped area</b> and <b>colored</b>, a
     if ((meters_from_center >2) or (meters_from_center<-2)):
         err=1
         
-<h3>  Processing the video stream <h3> 
+<h3>  Processing the video stream </h3> 
 
+We use a function that is reading frame by frame the video stream and applies the pipeline.
+BEfore doing so we create a Line object that will save many of the vector of points used in the lane detection.
+
+myLine=Line()
+
+# Read video
+clip = VideoFileClip(video_reference)
+    
+# Process video
+clip_processed = clip.fl_image(tracking_road) 
+
+
+<h3> Discussions </h3>
+
+In this project the most difficult part is to be robust to the change of shade on the road. 
+I coped with this problem by memorizing the last set of pixels that likely derived a "good" lane with at least two sliding windows with more than 50 pixels.<br><br>
+
+In the normal case where more than windows are detected I also take the median of the last frames to smooth the drawing of the lanes and avoid jumps in the coefficients. <br><br>
+
+The techniques would have been put under stress if the curves were changing directions abruptly but as mentioned in the class the regulators in the US impose a certain max curvature.
+Also if the car were to drive too fast compared to the sampling rate of the camera I could be subject to frames with very different curves. However it is likely not to happen since camera are fast enough nowadays.
+
+Finally, using more filtering techniques it is possible to enhance the detection of the lane by applying several filters consecutively to get more the yellow lanes, white lane, decrease the impact of shadow for example.
