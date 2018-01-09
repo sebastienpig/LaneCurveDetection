@@ -204,7 +204,7 @@ In case pixels cannot be detected in an enough quantity in at least 2 windows, w
 
 <h3>  Coloring the area between the lanes </h3> 
 
-A <b>polygone<b/> is retrieved from the <b>warped area<b> and <b>colored</b>, and then <b>superimposed</b> on the <b>undistorded</b> image.
+A <b>polygone</b> is retrieved from the <b>warped area<b> and <b>colored</b>, and then <b>superimposed</b> on the <b>undistorded</b> image.
 
 <img src="assets/green_portion_.jpg">
 
