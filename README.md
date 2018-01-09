@@ -204,7 +204,7 @@ In case pixels cannot be detected in an enough quantity in at least 2 windows, w
 
 <h3>  Coloring the area between the lanes </h3> 
 
-A <b>polygone</b> is retrieved from the <b>warped area<b> and <b>colored</b>, and then <b>superimposed</b> on the <b>undistorded</b> image.
+A <b>polygone</b> is retrieved from the <b>warped area</b> and <b>colored</b>, and then <b>superimposed</b> on the <b>undistorded</b> image.<br>
 
 <img src="assets/green_portion_.jpg">
 
@@ -224,5 +224,50 @@ A <b>polygone</b> is retrieved from the <b>warped area<b> and <b>colored</b>, an
 
 <h3>  Calculating the curvature <h3> 
 
+ We define a conversions in x and y from pixels space to meters and use a conversion factor. We use the points previoulsy extracted for drawing the curve.
+
+<pre>
+
+    ym_per_pix = 30 / 720  # meters per pixel in y dimension
+    xm_per_pix = 3.7 / 700  # meters per pixel in x dimension
+    
+    # Fit new polynomials to x,y in world space
+    left_fit_cr = np.polyfit(ploty*ym_per_pix, left_fit*xm_per_pix, 2)
+    right_fit_cr = np.polyfit(ploty*ym_per_pix, right_fit*xm_per_pix, 2)
+    
+    # Calculate the new radii of curvature
+    left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
+    right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
+    
+ </pre>
+ 
+ <li> Position of the car </li><br>
+ The position of the vehicle assumes the camera is mounted in the middle of the car (image full screen).<br>
+ We choose for the computation a pixel that belongs to each lane left and right, we add their coordinate and we compare with the midde of the image. A coefficient is applyed to get the value in meter.
+ We can decide to send a warning in case the car deviates by more than 2 meters, maybe the driver is sleeping.
+ 
+ <pre>
+    screen_middel_pixel = img.shape[1]/2
+    err=0 #to return erronous value in case of an error
+    
+    xm_per_pix = 3.7 / 700
+    
+    left_lane_pixel = left_fit[::-1][0]    # x position for left lane
+    right_lane_pixel = right_fit[::-1][0]   # x position for right lane
+    
+    car_position = int((right_lane_pixel + left_lane_pixel)/2)
+    pixel_from_center = screen_middel_pixel-car_position
+    meters_from_center = xm_per_pix * pixel_from_center
+    
+    if meters_from_center>=0:
+        side="left"
+    else:
+        side="right"
+    
+    print("Car is {} off center.".format(meters_from_center))
+    
+    if ((meters_from_center >2) or (meters_from_center<-2)):
+        err=1
+        
 <h3>  Processing the video stream <h3> 
 
